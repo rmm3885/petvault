@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}PetVault{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo">🐾</div>
+          <div>
+            <div class="brand-name">PetVault</div>
+            <div class="brand-tag">cute, calm pet records</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a class="navlink" href="{{ url_for('pets_deleted') }}">
+            Recently Deleted
+          </a>
+          <a class="navlink" href="{{ url_for('home') }}">Home</a>
+          <a class="navlink" href="{{ url_for('pets_list') }}">Pets</a>
+        </nav>
+      </header>
+
+      <main class="content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer class="footer">
+        <span>Made by Rachel • PetVault v1</span>
+      </footer>
+    </div>
+  </body>
+</html>
