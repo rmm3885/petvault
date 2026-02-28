@@ -1,0 +1,296 @@
+/* ===============================
+   PetVault — Bubbly Calm Theme
+   ===========  ==================== */
+
+:root{
+  --bg1: #fff6fb;
+  --bg2: #f3f7ff;
+  --ink: #1f2a37;
+  --muted: #64748b;
+  --card: rgba(255,255,255,0.85);
+  --border: rgba(15, 23, 42, 0.10);
+  --shadow: 0 20px 60px rgba(15, 23, 42, 0.10);
+  --radius: 22px;
+
+  --pink: #ff6fb1;
+  --lav: #8b5cf6;
+  --sky: #38bdf8;
+  --mint: #34d399;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 600px at 20% 10%, var(--bg1), transparent),
+    radial-gradient(900px 500px at 80% 20%, var(--bg2), transparent),
+    linear-gradient(180deg, #ffffff, #fafafa);
+}
+
+.page{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+/* ===============================
+   Top Bar
+   =============================== */
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.brand{ display:flex; gap:12px; align-items:center; }
+
+.logo{
+  width: 44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,111,177,0.25), rgba(56,189,248,0.25));
+  border: 1px solid var(--border);
+  font-size: 20px;
+}
+
+.brand-name{
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.brand-tag{
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.nav{ display:flex; gap:10px; }
+
+.navlink{
+  text-decoration:none;
+  color: var(--ink);
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+}
+
+.navlink:hover{
+  border-color: var(--border);
+  background: rgba(255,255,255,0.6);
+}
+
+/* ===============================
+   Content
+   =============================== */
+
+.content{ padding: 18px 4px; }
+
+.hero{
+  display:grid;
+  place-items:center;
+  padding: 28px 0;
+}
+
+.hero-card{
+  width: 100%;
+  max-width: 760px;
+  padding: 26px;
+  border-radius: calc(var(--radius) + 6px);
+  background: linear-gradient(
+    135deg,
+    rgba(255,111,177,0.18),
+    rgba(139,92,246,0.16),
+    rgba(56,189,248,0.14)
+  );
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-card h1{
+  margin:0 0 8px 0;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.muted{ color: var(--muted); }
+
+/* ===============================
+   Buttons
+   =============================== */
+
+.button-row{
+  display:flex;
+  gap:12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.75);
+  color: var(--ink);
+  text-decoration:none;
+  font-weight: 650;
+  box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+  transition: all 0.15s ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+}
+
+.btn.primary{
+  border-color: rgba(255,111,177,0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(255,111,177,0.35),
+    rgba(56,189,248,0.28)
+  );
+}
+
+.btn.small{
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-weight: 650;
+}
+
+.btn.ghost{
+  background: rgba(255,255,255,0.55);
+}
+
+/* ===============================
+   Chips
+   =============================== */
+
+.chips{
+  display:flex;
+  gap:10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.chip{
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 13px;
+}
+
+/* ===============================
+   Grid + Cards
+   =============================== */
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin: 6px 6px 14px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 740px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+.card{
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.08);
+}
+
+.card-top{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.pet-emoji{
+  width: 44px;
+  height:44px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(
+    135deg,
+    rgba(52,211,153,0.22),
+    rgba(56,189,248,0.20)
+  );
+  border: 1px solid var(--border);
+  font-size: 20px;
+}
+
+.card-title{
+  font-weight: 800;
+}
+
+.card-actions{
+  display:flex;
+  gap:10px;
+  margin-top: 14px;
+}
+
+/* ===============================
+   Forms
+   =============================== */
+
+.input{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.75);
+  box-shadow: 0 10px 20px rgba(15,23,42,0.06);
+  outline: none;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+.input:focus{
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 0 0 4px rgba(56,189,248,0.18);
+}
+
+/* ===============================
+   Footer
+   =============================== */
+
+.footer{
+  margin-top: 16px;
+  padding: 14px 10px;
+  color: var(--muted);
+  text-align:center;
+  font-size: 12px;
+}
+
+.btn.danger{
+  border-color: rgba(255,111,177,0.55);
+  background: rgba(255,111,177,0.12);
+}
