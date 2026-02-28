@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}PetVault • Pets{% endblock %}
+
+{% block content %}
+  <div class="section-head">
+    <h2>Your Pets</h2>
+    <a class="btn primary" href="{{ url_for('pets_new') }}">+ Add Pet</a>
+  </div>
+
+  <div class="grid">
+    {% for pet in pets %}
+      <div class="card">
+        <div class="card-top">
+          <div class="pet-emoji">🐶</div>
+          <div>
+            <div class="card-title">{{ pet.name }}</div>
+            <div class="muted">
+              {{ pet.species }}
+              {% if pet.breed %} • {{ pet.breed }}{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <form method="POST"
+                action="{{ url_for('delete_pet', pet_id=pet.id) }}"
+                style="display:inline;">
+            <button class="btn small ghost" type="submit">
+              🗑 Remove
+            </button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
