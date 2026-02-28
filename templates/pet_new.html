@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block title %}PetVault • Add Pet{% endblock %}
+
+{% block content %}
+  <div class="section-head">
+    <h2>Add a Pet</h2>
+    <a class="btn" href="{{ url_for('pets_list') }}">Back</a>
+  </div>
+
+  <div class="card">
+    {% if error %}
+      <div class="chip" style="border-color: rgba(255,111,177,0.5);">
+        ⚠️ {{ error }}
+      </div>
+      <div style="height: 10px;"></div>
+      
+    {% endif %}
+
+    <form method="POST">
+      <label>Name *</label><br/>
+      <input class="input" name="name" placeholder="Pet's Name" required /> 
+
+      <label>Species *</label><br/>
+      <select class="input" name="species" id="species" required>
+        <option value="" selected disabled>Select a species…</option>
+        <option>Dog</option>
+        <option>Cat</option>
+        <option>Rabbit</option>
+        <option>Bird</option>
+        <option>Guinea Pig</option>
+        <option>Hamster</option>
+        <option>Ferret</option>
+        <option>Reptile</option>
+        <option>Fish</option>
+        <option>Other</option>
+      </select>
+      <br/><br/>
+
+      <label>Breed</label><br/>
+      <input class="input" name="breed" id="breed" list="breedList" placeholder="Start typing a breed…" />
+      <datalist id="breedList"></datalist>
+      <br/><br/>
+
+      <label>Notes</label><br/>
+      <textarea class="input" name="notes" rows="4" placeholder="Allergies, vet notes, etc."></textarea><br/><br/>
+
+      <button class="btn primary" type="submit">Save Pet</button>
+      <a class="btn ghost" href="{{ url_for('pets_list') }}">Cancel</a>
+
+    <script>
+      // Simple client-side breed suggestions that change based on Species
+      const BREEDS_BY_SPECIES = {
+        "Dog": [
+          "Labrador Retriever",
+          "Golden Retriever",
+          "Poodle",
+          "French Bulldog",
+          "Border Collie",
+          "German Shepherd",
+          "Cavalier King Charles Spaniel",
+          "Shiba Inu",
+          "Dachshund",
+          "Siberian Husky",
+          "Pomeranian",
+          "Maltese",
+          "Corgi",
+          "Chihuahua",
+          "Mixed / Crossbreed"
+        ],
+        "Cat": [
+          "British Shorthair",
+          "Ragdoll",
+          "Siamese",
+          "Maine Coon",
+          "Bengal",
+          "Scottish Fold",
+          "Persian",
+          "Sphynx",
+          "Russian Blue",
+          "Abyssinian",
+          "Domestic Shorthair",
+          "Domestic Longhair"
+        ],
+        "Rabbit": [
+          "Holland Lop",
+          "Netherland Dwarf",
+          "Mini Rex",
+          "Lionhead",
+          "Flemish Giant",
+          "English Lop",
+          "Mixed"
+        ],
+        "Bird": [
+          "Budgerigar (Budgie)",
+          "Cockatiel",
+          "Lovebird",
+          "African Grey",
+          "Conure",
+          "Canary",
+          "Finch",
+          "Parakeet"
+        ],
+        "Guinea Pig": [
+          "American",
+          "Abyssinian",
+          "Peruvian",
+          "Silkie",
+          "Teddy",
+          "Skinny Pig"
+        ],
+        "Hamster": [
+          "Syrian",
+          "Dwarf Campbell",
+          "Dwarf Winter White",
+          "Roborovski",
+          "Chinese"
+        ],
+        "Ferret": [
+          "Standard",
+          "Angora",
+          "Other"
+        ],
+        "Reptile": [
+          "Bearded Dragon",
+          "Leopard Gecko",
+          "Crested Gecko",
+          "Corn Snake",
+          "Ball Python",
+          "Tortoise",
+          "Turtle"
+        ],
+        "Fish": [
+          "Betta",
+          "Goldfish",
+          "Guppy",
+          "Molly",
+          "Tetra",
+          "Cichlid",
+          "Koi"
+        ],
+        "Other": []
+      };
+
+      const speciesEl = document.getElementById('species');
+      const breedEl = document.getElementById('breed');
+      const breedListEl = document.getElementById('breedList');
+
+      function setBreedOptions(species) {
+        // Clear the current breed value whenever species changes
+        breedEl.value = '';
+
+        // Reset placeholder to guide the user
+        breedEl.placeholder = 'Start typing a breed…';
+
+        // Clear existing options
+        breedListEl.innerHTML = '';
+
+        const breeds = BREEDS_BY_SPECIES[species] || [];
+        for (const b of breeds) {
+          const opt = document.createElement('option');
+          opt.value = b;
+          breedListEl.appendChild(opt);
+        }
+
+        // If there are no suggestions (e.g., Other), keep the free-text input
+        if (!breeds.length) {
+          breedEl.placeholder = 'Type the breed (optional)…';
+        }
+      }
+
+      speciesEl.addEventListener('change', (e) => {
+        setBreedOptions(e.target.value);
+      });
+
+      // If the browser restores form state, try to sync on load
+      window.addEventListener('DOMContentLoaded', () => {
+        // Populate suggestions for the current species without clearing an existing value
+        if (!speciesEl.value) return;
+
+        // Build options list
+        breedListEl.innerHTML = '';
+        const breeds = BREEDS_BY_SPECIES[speciesEl.value] || [];
+        for (const b of breeds) {
+          const opt = document.createElement('option');
+          opt.value = b;
+          breedListEl.appendChild(opt);
+        }
+
+        if (!breeds.length) {
+          breedEl.placeholder = 'Type the breed (optional)…';
+        }
+      });
+    </script>
+    </form>
+  </div>
+{% endblock %}
