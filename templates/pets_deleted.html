@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}PetVault • Recently Deleted{% endblock %}
+
+{% block content %}
+  <div class="section-head">
+    <h2>Recently Deleted</h2>
+    <a class="btn" href="{{ url_for('pets_list') }}">Back to Pets</a>
+  </div>
+
+  <div class="grid">
+    {% for pet in pets %}
+      <div class="card">
+        <div class="card-top">
+          <div class="card-actions">
+            <form method="POST" action="{{ url_for('restore_pet', pet_id=pet.id) }}" style="display:inline;">
+              <button class="btn small" type="submit">↩️ Restore</button>
+            </form>
+
+            <form method="POST" action="{{ url_for('purge_pet', pet_id=pet.id) }}" style="display:inline;">
+              <button class="btn small danger" type="submit"
+                      onclick="return confirm('Delete forever? This cannot be undone.');">
+                🧨 Delete Forever
+              </button>
+            </form>
+          </div>
+          <div class="pet-emoji">🗑</div>
+          <div>
+            <div class="card-title">{{ pet.name }}</div>
+            <div class="muted">
+              {{ pet.species }}
+              {% if pet.breed %} • {{ pet.breed }}{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if not pets %}
+      <div class="card">
+        <div class="muted">No deleted pets.</div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
