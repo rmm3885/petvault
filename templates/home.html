@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}PetVault • Home{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Your pets, beautifully organized.</h1>
+      <p class="muted">
+        Keep vaccinations, notes, and essentials in one place.
+      </p>
+
+      <div class="button-row">
+        <a class="btn primary" href="{{ url_for('pets_list') }}">View Pets</a>
+        <a class="btn" href="{{ url_for('pets_new') }}">Add Pet</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
